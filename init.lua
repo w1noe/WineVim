@@ -1,4 +1,4 @@
---configuration for winoe
+--winoe's configuration
 --first code begins at 2026.4.11 00:18
 --It's so late right now, and there are damn tests tommorrow :(
 --Anyway, lets get started!
