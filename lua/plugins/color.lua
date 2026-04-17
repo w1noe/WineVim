@@ -10,7 +10,7 @@ return{
 	priority = 1000, -- make sure to load this before all the other start plugins
 	config = function()
 	vim.cmd([[colorscheme tokyonight]])
-	if preferences.transparent then
+	if WVimPrefer.transparent then
 	    make_transparency()
 	end
 	end,

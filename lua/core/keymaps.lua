@@ -1,3 +1,8 @@
+--Convention: All the keymap settings in another file, the file path should be added in as a comment.
+--At the start of this file
+--
+--"config.dap_config.dap_ui"
+
 local keymap = vim.keymap
 
 vim.g.mapleader = " "

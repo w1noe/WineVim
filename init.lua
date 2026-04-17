@@ -3,16 +3,16 @@
 --It's so late right now, and there are damn tests tommorrow :(
 --Anyway, lets get started!
 
+--Important: -------------------------------
+--The global options such as make_transparency are in the configs.preferences file,
+--check this out!!!!!
+----------------------------------------------
 print("winoe configuration")
 
 -- Nvim-tree: disable netrw at the very start of your init.lua
   vim.g.loaded_netrw = 1
   vim.g.loaded_netrwPlugin = 1
 
---Important: -------------------------------
---The global options such as make_transparency are in the configs.preferences file,
---check this out!!!!!
-----------------------------------------------
 
 require("config.preferences")
 require("core.options")
@@ -21,6 +21,11 @@ require("config.lazy")
 require("config.lsp_switcher")
 
 require("config.init_behaviour")
+
+--Dap language configs
+require("config.dap_config.dap_config")
+
+
 
 vim.opt.termguicolors = true
 

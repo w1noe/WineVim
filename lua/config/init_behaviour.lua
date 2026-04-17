@@ -5,3 +5,6 @@ vim.diagnostic.config({
   underline = true,
   severity_sort = true,
 })
+
+--Init python enviroment
+
