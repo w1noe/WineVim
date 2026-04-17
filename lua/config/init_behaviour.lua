@@ -8,3 +8,7 @@ vim.diagnostic.config({
 
 --Init python enviroment
 
+
+--Bufferline
+require("bufferline").setup{}
+--
