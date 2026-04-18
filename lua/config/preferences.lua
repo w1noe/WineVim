@@ -11,3 +11,6 @@ WVimPrefer.python_lsp_active = true
 --Debug
 WVimPrefer.close_file_tree_before_debug = true
 WVimPrefer.open_file_tree_after_debug = true
+
+--Terminal
+WVimPrefer.disable_the_defualt_terminal = true
