@@ -3,8 +3,6 @@ My configuration for neovim.
 
 ## Installation
 
-Refered the install of lazyvim.
-
 ### For linux & mac:
 ```bash
 # required
@@ -16,7 +14,7 @@ mv ~/.local/state/nvim{,.bak}
 mv ~/.cache/nvim{,.bak}
 
 #Clone the github repository
-git clone https://github.com/LazyVim/starter ~/.config/nvim
+git clone https://github.com/w1noe/WineVim.git ~/.config/nvim
 
 #Remove the .git folder so you can push the code to your own reposertory
 rm -rf ~/.config/nvim/.git
@@ -42,3 +40,5 @@ nvim
 
 
 ## Features
+
+In my plugin, there is something like the preference pannel in other softwares. But it's in a file under /lua/config/preferences.lua. There are a lot of settings for you to config.
