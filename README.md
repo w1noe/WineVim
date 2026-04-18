@@ -17,7 +17,7 @@ mv ~/.cache/nvim{,.bak}
 git clone https://github.com/w1noe/WineVim.git ~/.config/nvim
 
 #如果连接不上github, 且你在中国，试试这个.
-git clone https://gitee.com/w1noe/WineVim.git ~/.config/nvim
+git clone https://gitee.com/winoe/WineVim.git ~/.config/nvim
 
 #Remove the .git folder so you can push the code to your own reposertory
 rm -rf ~/.config/nvim/.git
@@ -34,7 +34,7 @@ Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.bak
 Move-Item $env:LOCALAPPDATA\nvim-data $env:LOCALAPPDATA\nvim-data.bak
 
 #Clone the github repository
-git clone https://github.com/winoe/WineVim.git $env:LOCALAPPDATA\nvim
+git clone https://github.com/w1noe/WineVim.git $env:LOCALAPPDATA\nvim
 
 #如果你连接不上github且你在中国，试试这个
 git clone https://gitee.com/winoe/WineVim.git $env:LOCALAPPDATA\nvim
