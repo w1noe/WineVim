@@ -27,3 +27,12 @@ if WVimPrefer.disable_the_defualt_terminal then
     end
 end
 ---------------------------
+
+
+--Mason config
+require("mason").setup()
+require("mason-lspconfig").setup({
+    ensure_installed = { "lua_ls", "pyright", "clangd" },
+    automatic_installation = true,
+})
+--

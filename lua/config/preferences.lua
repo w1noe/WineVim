@@ -14,3 +14,6 @@ WVimPrefer.open_file_tree_after_debug = true
 
 --Terminal
 WVimPrefer.disable_the_defualt_terminal = true
+
+--Coding style
+WVimPrefer.tab_to_spaces = true

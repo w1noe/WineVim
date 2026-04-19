@@ -20,5 +20,8 @@ opt.smartcase = true
 opt.termguicolors = true
 opt.signcolumn = "yes" 
 
+if WVimPrefer.tab_to_spaces then
+    opt.expandtab = true
+end
 
 

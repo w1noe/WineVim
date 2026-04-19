@@ -26,6 +26,10 @@ nvim
 ```
 
 ### For Windows:
+
+First, npm is required, so visit https://www.nodejs.com.cn/download.html.
+Then, scoop is highly recommended, visit https://scoop.sh/ to install.
+
 ```bash
 # required
 Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.bak
@@ -43,6 +47,7 @@ git clone https://gitee.com/winoe/WineVim.git $env:LOCALAPPDATA\nvim
 Remove-Item $env:LOCALAPPDATA\nvim\.git -Recurse -Force
 nvim
 ```
+
 
 
 ## Features
