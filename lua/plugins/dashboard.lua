@@ -34,7 +34,7 @@ return {
                         key = "o",
                         action = function()
                             local config_path = vim.fn.stdpath("config")
-                            vim.cmd("NvimTreeOpen " .. config_path)
+                            require("nvim-tree.api").tree.open({ path = config_path })
                         end,
                     },
                     {
@@ -110,7 +110,9 @@ return {
                         icon = "  ",
                         desc = "Open Project     ",
                         key = "p",
-                        action = "NvimTreeOpen .",
+                        action = function()
+                            require("nvim-tree.api").tree.open()
+                        end,
                     },
                     {
                         icon = "  ",
