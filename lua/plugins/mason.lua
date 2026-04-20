@@ -14,8 +14,11 @@ return {
                     "stylua",
 
                     "pyright", -- Python
+                    "debugpy",
+                    "pylsp",
 
                     "clangd", -- C/C++
+                    "clang-format"
                 },
                 automatic_installation = true,
             })
