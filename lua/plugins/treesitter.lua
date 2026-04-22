@@ -4,23 +4,26 @@ return {
     lazy = false,
     build = ":TSUpdate",
     opts = {
-        -- 开启高亮（核心）
         highlight = {
             enable = true,
             additional_vim_regex_highlighting = false, -- 关闭旧高亮，防止冲突
         },
 
-        -- 自动安装这些语言解析器（lua + python 必加）
         ensure_installed = {
             "lua",
             "vim",
             "vimdoc",
-            "python",  -- 👈 加上这个，Python 高亮立刻正常
+            "python",
         },
 
-        -- 开启自动缩进（Python 非常需要）
         indent = { enable = true },
     },
+    config = function()
+        require("nvim-treesitter.configs").setup({
+            sync_install = false,
+            auto_install = true, 
+        })
+    end,
 }
 
 --

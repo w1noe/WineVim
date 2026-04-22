@@ -35,4 +35,23 @@ require("mason-lspconfig").setup({
     ensure_installed = { "lua_ls", "pyright", "clangd" },
     automatic_installation = true,
 })
+
+--Config lldb for dap
+local dap = require('dap')
+
+dap.adapters.codelldb = {
+  type = 'server',
+  port = '${port}',
+  executable = {
+    command = vim.fn.stdpath('data') .. '/mason/packages/codelldb/extension/adapter/codelldb',
+    args = {'--port', '${port}'},
+  }
+}
+-- --Regist mason installs to dap
+-- local dap = require('dap')
+-- require('mason-nvim-dap').setup_handlers {
+--     function(source_name)
+--         require('mason-nvim-dap.automatic_setup')(source_name)
+--     end,
+-- }
 --

@@ -18,7 +18,8 @@ return {
                     "pylsp",
 
                     "clangd", -- C/C++
-                    "clang-format"
+                    "clang-format",
+                    "codelldb"
                 },
                 automatic_installation = true,
             })

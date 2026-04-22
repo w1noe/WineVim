@@ -1,6 +1,7 @@
 return {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
+    dependencies = { "nvim-tree/nvim-tree.lua" },
     config = function()
         local dashboard = require("dashboard")
         dashboard.setup({
@@ -34,7 +35,9 @@ return {
                         key = "o",
                         action = function()
                             local config_path = vim.fn.stdpath("config")
-                            require("nvim-tree.api").tree.open({ path = config_path })
+                            -- 先临时切换 CWD → 打开 nvim-tree → 自动同步
+                            vim.cmd("cd " .. config_path)
+                            require("nvim-tree.api").tree.open()
                         end,
                     },
                     {
@@ -79,7 +82,7 @@ return {
                                             -- delay action, to ensure nvim-tree has already
                                             vim.defer_fn(function()
                                                 local dir_path = vim.fn.fnamemodify(file_path, ":h")
-                                                vim.cmd("NvimTreeOpen " .. dir_path)
+                                                require("nvim-tree.api").tree.open({ path = dir_path })
                                                 vim.cmd("NvimTreeFindFile")
                                             end, 20)
                                         end
