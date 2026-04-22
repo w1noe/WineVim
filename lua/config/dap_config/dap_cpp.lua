@@ -6,6 +6,17 @@ dap.adapters.gdb = {
     command = "gdb",
     args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
 }
+
+local dap = require('dap')
+
+dap.adapters.codelldb = {
+  type = 'server',
+  port = '${port}',
+  executable = {
+    command = vim.fn.stdpath('data') .. '/mason/packages/codelldb/extension/adapter/codelldb',
+    args = {'--port', '${port}'},
+  }
+}
 --Debugger
 dap.configurations.c = {
     {

@@ -70,7 +70,7 @@ return {
 
                             require("telescope.builtin").oldfiles({
                                 attach_mappings = function(_, map)
-                                    map("n", "<CR>", function(prompt_bufnr)
+                                    local function open_file(prompt_bufnr)
                                         local action_state = require("telescope.actions.state")
                                         local selected_entry = action_state.get_selected_entry()
                                         require("telescope.actions").close(prompt_bufnr)
@@ -79,31 +79,20 @@ return {
                                             local file_path = selected_entry.value
                                             vim.cmd("edit " .. vim.fn.fnameescape(file_path))
 
-                                            -- delay action, to ensure nvim-tree has already
+                                            -- 🔥 修复：改用 api 打开，不用命令行，彻底解决 Windows 路径报错
                                             vim.defer_fn(function()
-                                                local dir_path = vim.fn.fnamemodify(file_path, ":h")
-                                                require("nvim-tree.api").tree.open({ path = dir_path })
-                                                vim.cmd("NvimTreeFindFile")
-                                            end, 20)
+                                                local ok, api = pcall(require, "nvim-tree.api")
+                                                if ok then
+                                                    local dir_path = vim.fn.fnamemodify(file_path, ":h")
+                                                    api.tree.open({ path = dir_path })
+                                                    api.tree.find_file({ focus = false })
+                                                end
+                                            end, 30)
                                         end
-                                    end)
-                                    map("i", "<CR>", function(prompt_bufnr)
-                                        local action_state = require("telescope.actions.state")
-                                        local selected_entry = action_state.get_selected_entry()
-                                        require("telescope.actions").close(prompt_bufnr)
+                                    end
 
-                                        if selected_entry then
-                                            local file_path = selected_entry.value
-                                            vim.cmd("edit " .. vim.fn.fnameescape(file_path))
-
-                                            -- delay action, to ensure nvim-tree has already
-                                            vim.defer_fn(function()
-                                                local dir_path = vim.fn.fnamemodify(file_path, ":h")
-                                                vim.cmd("NvimTreeOpen " .. dir_path)
-                                                vim.cmd("NvimTreeFindFile")
-                                            end, 20)
-                                        end
-                                    end)
+                                    map("n", "<CR>", open_file)
+                                    map("i", "<CR>", open_file)
                                     return true
                                 end,
                             })
