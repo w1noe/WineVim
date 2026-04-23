@@ -2,8 +2,21 @@ return {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
     dependencies = { "nvim-tree/nvim-tree.lua" },
+
     config = function()
         local dashboard = require("dashboard")
+        local function get_startup_time()
+            local ok, stats = pcall(require, "lazy.stats")
+            if not ok then
+                return "~ ms"
+            end
+
+            local s = stats.stats()
+            local ms = s.times.UIEnter or s.times.LazyDone or 99
+
+            return string.format("%.2f ms", ms)
+        end
+
         dashboard.setup({
             theme = "doom",
             config = {
@@ -35,7 +48,6 @@ return {
                         key = "o",
                         action = function()
                             local config_path = vim.fn.stdpath("config")
-                            -- 先临时切换 CWD → 打开 nvim-tree → 自动同步
                             vim.cmd("cd " .. config_path)
                             require("nvim-tree.api").tree.open()
                         end,
@@ -63,36 +75,30 @@ return {
                         desc = "Recent Files     ",
                         key = "r",
                         action = function()
-                            if not pcall(require, "telescope") then
-                                vim.cmd("echo 'Telescope not installed!'")
-                                return
-                            end
-
                             require("telescope.builtin").oldfiles({
                                 attach_mappings = function(_, map)
                                     local function open_file(prompt_bufnr)
-                                        local action_state = require("telescope.actions.state")
-                                        local selected_entry = action_state.get_selected_entry()
-                                        require("telescope.actions").close(prompt_bufnr)
+                                        local actions = require("telescope.actions")
+                                        local state = require("telescope.actions.state")
+                                        local path = state.get_selected_entry().value
+                                        actions.close(prompt_bufnr)
 
-                                        if selected_entry then
-                                            local file_path = selected_entry.value
-                                            vim.cmd("edit " .. vim.fn.fnameescape(file_path))
+                                        -- 打开文件
+                                        vim.cmd.edit(vim.fn.fnameescape(path))
 
-                                            -- 🔥 修复：改用 api 打开，不用命令行，彻底解决 Windows 路径报错
-                                            vim.defer_fn(function()
-                                                local ok, api = pcall(require, "nvim-tree.api")
-                                                if ok then
-                                                    local dir_path = vim.fn.fnamemodify(file_path, ":h")
-                                                    api.tree.open({ path = dir_path })
-                                                    api.tree.find_file({ focus = false })
-                                                end
-                                            end, 30)
-                                        end
+                                        -- 打开 tree 并定位，但光标**不跳过去**
+                                        vim.defer_fn(function()
+                                            local ok, api = pcall(require, "nvim-tree.api")
+                                            if ok then
+                                                api.tree.open()
+                                                api.tree.find_file({ open = false, focus = false })
+                                                -- 强制回到编辑窗口
+                                                vim.cmd.wincmd("w")
+                                            end
+                                        end, 50)
                                     end
-
-                                    map("n", "<CR>", open_file)
                                     map("i", "<CR>", open_file)
+                                    map("n", "<CR>", open_file)
                                     return true
                                 end,
                             })
@@ -113,16 +119,34 @@ return {
                         action = "qa",
                     },
                 },
+
                 center_vertical = false,
-                footer = { "🚀 Ready to code! Another good day, winoe! " },
                 recent_files = { enable = false },
-            },
-            ui = {
-                header = { align = "center" },
-                center = { align = "center" },
-                footer = { align = "center" },
+                footer = {
+                    "Ready to code! Another good day, winoe! ",
+                    "",
+                    "",
+                    "",
+                    "🚀 Startup Time [" .. get_startup_time() .. "]",
+                },
+
+                ui = {
+                    header = { align = "center" },
+                    center = { align = "center" },
+                    footer = { align = "center" },
+                },
             },
         })
     end,
-    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+
+    dependencies = {
+        { "nvim-tree/nvim-web-devicons" },
+        {
+            "dstein64/vim-startuptime",
+            cmd = "StartupTime",
+            init = function()
+                vim.g.startuptime_use_nested = 0
+            end,
+        },
+    },
 }
