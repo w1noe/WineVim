@@ -35,10 +35,20 @@ return {
                 function()
                     local api = require("nvim-tree.api")
                     local node = api.tree.get_node_under_cursor()
+
+                    -- 跳过无效节点（如 ..、--Deleted-- 等）
+                    if not node or node.name == ".." or node.name == "--Deleted--" then
+                        vim.notify("无效节点，无法打开", vim.log.levels.WARN)
+                        return
+                    end
+
                     local path = node.fs_type == "directory" and node.absolute_path
                         or vim.fn.fnamemodify(node.absolute_path, ":h")
+
+                    -- Windows
                     if vim.fn.has("win32") == 1 then
-                        vim.fn.system(string.format('start "" "%s"', path))
+                        vim.fn.system(string.format([[powershell start "%s"]], path))
+                    -- Linux / macOS
                     else
                         vim.fn.system(string.format('xdg-open "%s"', path))
                     end
