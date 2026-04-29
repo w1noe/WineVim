@@ -3,6 +3,15 @@ My configuration for neovim.
 
 ## Installation
 
+### Requires
+1. npm, nodejs
+2. gcc, g++, cmake, ninja
+3. python
+
+*  Then, after installing plugins, in Mason you should install: 
+
+codelldb stylua
+
 ### For linux & mac:
 ```bash
 # required
@@ -27,8 +36,7 @@ nvim
 
 ### For Windows:
 
-First, npm is required, so visit https://www.nodejs.com.cn/download.html.
-Then, scoop is highly recommended, visit https://scoop.sh/ to install.
+Scoop is highly recommended, visit https://scoop.sh/ to install.
 
 ```bash
 # required
@@ -49,7 +57,19 @@ nvim
 ```
 
 
+### Required commands
+
+For windows:
+```bash
+cd "%LOCALAPPDATA%\nvim-data\lazy\markdown-preview.nvim\app" && npm install
+```
+
+For mac & linux:
+```bash
+cd ~/.local/share/nvim/lazy/markdown-preview.nvim/app && npm install
+```
 
 ## Features
 
 In my plugin, there is something like the preference pannel in other softwares. But it's in a file under /lua/config/preferences.lua. There are a lot of settings for you to config.
+
