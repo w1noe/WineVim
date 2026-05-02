@@ -61,7 +61,8 @@ nvim
 
 For windows:
 ```bash
-cd "%LOCALAPPDATA%\nvim-data\lazy\markdown-preview.nvim\app" && npm install
+cd "~\AppData\Local\nvim-data\lazy\markdown-preview.nvim\app"
+npm install
 ```
 
 For mac & linux:
