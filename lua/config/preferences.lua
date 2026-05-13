@@ -18,3 +18,6 @@ WVimPrefer.disable_the_defualt_terminal = true
 
 --Coding style
 WVimPrefer.tab_to_spaces = true
+
+-- with proxy
+WVimPrefer.download_proxy = true

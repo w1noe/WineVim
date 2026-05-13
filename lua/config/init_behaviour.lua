@@ -36,6 +36,13 @@ require("mason-lspconfig").setup({
     automatic_installation = true,
 })
 
+--Proxy config
+if WVimPrefer.download_proxy then
+    vim.env.HTTP_PROXY = "http://127.0.0.1:7897"
+    vim.env.HTTPS_PROXY = "https://127.0.0.1:7897"
+end
+
+
 -- --Regist mason installs to dap
 -- local dap = require('dap')
 -- require('mason-nvim-dap').setup_handlers {
