@@ -9,3 +9,7 @@ end
 if WVimPrefer.cpp_lsp_active then
     vim.lsp.enable("clangd")
 end
+
+if WVimPrefer.rust_lsp_active then
+    vim.lsp.enable("rust_analyzer")
+end

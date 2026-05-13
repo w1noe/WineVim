@@ -6,6 +6,7 @@ WVimPrefer.transparent = false
 WVimPrefer.lua_lsp_active = true
 WVimPrefer.cpp_lsp_active = true
 WVimPrefer.python_lsp_active = true
+WVimPrefer.rust_lsp_active= true
 
 
 --Debug
